@@ -1,0 +1,206 @@
+This file contains some regex problems and their solutions.
+
+These questions were taken from https://regexone.com/problem/complete?
+They are divided into two sections, lesson problems and practice problems.
+Lesson problems are basics, practice problems are related to real world problems.
+
+--==================================================
+Lesson Problems
+--==================================================
+
+Exercise 1: Matching Characters
+Task	Text	 
+Match	abcdefg	
+Match	abcde	
+Match	abc
+\w*
+
+Exercise 1½: Matching Digits
+Task	Text	 
+Match	abc123xyz	
+Match	define "123"	
+Match	var g = 123;	
+[a-z 0-9 =";]*
+
+Exercise 2: Matching With Wildcards
+Task	Text	 
+Match	cat.	
+Match	896.	
+Match	?=+.	
+Skip	abc1
+.*\.
+
+
+Exercise 3: Matching Characters
+Task	Text	 
+Match	can	
+Match	man	
+Match	fan	
+Skip	dan	
+Skip	ran	
+Skip	pan
+(?:c|m|f)an
+
+Exercise 4: Excluding Characters
+Task	Text	 
+Match	hog	
+Match	dog	
+Skip	bog
+[^b]og
+
+Exercise 5: Matching Character Ranges
+Task	Text	 
+Match	Ana	
+Match	Bob	
+Match	Cpc	
+Skip	aax	
+Skip	bby	
+Skip	ccz
+[A-Z].*
+
+Exercise 6: Matching Repeated Characters
+Task	Text	 
+Match	wazzzzzup
+Match	wazzzup
+Skip	wazup
+wa[z]{2,}up
+
+Exercise 7: Matching Repeated Characters
+Task	Text	 
+Match	aaaabcc
+Match	aabbbbc
+Match	aacc
+Skip	a
+a+b*c+
+
+
+Exercise 8: Matching Optional Characters
+Task	Text	 
+Match	1 file found?	
+Match	2 files found?
+Match	24 files found?
+Skip	No files found.
+\d* file[s]? found\?
+
+Exercise 9: Matching Whitespaces
+Task	Text	 
+Match	1.   abc	Success
+Match	2.	abc	Success
+Match	3.           abc	Success
+Skip	4.abc
+\d\.\s+\w*
+
+Exercise 10: Matching Lines
+Task	Text	 
+Match	Mission: successful	Success
+Skip	Last Mission: unsuccessful	To be completed
+Skip	Next Mission: successful upon capture of target
+^Mission: successful$
+
+Exercise 11: Matching Groups
+Task	Text	Capture Groups	 
+Capture	file_record_transcript.pdf	file_record_transcript	Success
+Capture	file_07241999.pdf	file_07241999	Success
+Skip	testfile_fake.pdf.tmp
+(.*)\.pdf$
+
+Exercise 12: Matching Nested Groups
+Task	Text	Capture Groups	 
+Capture	Jan 1987	Jan 1987 1987	Success
+Capture	May 1969	May 1969 1969	Success
+Capture	Aug 2011	Aug 2011 2011	Success
+(([a-zA-Z]{3}) ([0-9]{4}))
+
+Exercise 13: Matching Nested Groups
+Task	Text	Capture Groups	 
+Capture	1280x720	1280 720	Success
+Capture	1920x1600	1920 1600	Success
+Capture	1024x768	1024 768	Success
+([\d]{3,4})x([\d]{3,4})
+
+Exercise 14: Matching Conditional Text
+Task	Text	 
+Match	I love cats	Success
+Match	I love dogs	Success
+Skip	I love logs	To be completed
+Skip	I love cogs	To be completed
+I love (?:cats|dogs)
+
+--==================================================
+Practice problems
+--==================================================
+
+Exercise 1: Matching Numbers
+Task	Text	 
+Match	3.14529	Success
+Match	-255.34	Success
+Match	128	Success
+Match	1.9e10	Success
+Match	123,340.00
+^[\-\,0-9]+[\.0-9e]+$
+
+Exercise 2: Matching Phone Numbers
+Task	Text	Capture Groups	 
+Capture	415-555-1234	415	Success
+Capture	650-555-2345	650	Success
+Capture	(416)555-3456	416	Success
+Capture	202 555 4567	202	Success
+Capture	4035555678	403	Success
+Capture	1 416 555 9292
+(?:\d )?[(]?([0-9]{3})[ \-)]?
+
+Exercise 3: Matching Emails
+Task	Text	Capture Groups	 
+Capture	tom@hogwarts.com	tom	Success
+Capture	tom.riddle@hogwarts.com	tom.riddle	Success
+Capture	tom.riddle+regexone@hogwarts.com	tom.riddle	Success
+Capture	tom@hogwarts.eu.com	tom	Success
+Capture	potter@hogwarts.com	potter	Success
+Capture	harry@hogwarts.com	harry	Success
+Capture	hermione+regexone@hogwarts.com	
+([a-z.]*)(?:\+regexone)?@[a-z.]*
+
+Exercise 4: Capturing HTML Tags
+Task	Text	Capture Groups	 
+Capture	<a>This is a link</a>	a	Success
+Capture	<a href='https://regexone.com'>Link</a>	a	Success
+Capture	<div class='test_style'>Test</div>	div	Success
+Capture	<div>Hello <span>world</span></div>
+<([a-z]*).*>?
+
+Exercise 5: Capturing Filename Data
+Task	Text	Capture Groups	 
+Skip	.bash_profile		To be completed
+Skip	workspace.doc		To be completed
+Capture	img0912.jpg	img0912 jpg	Success
+Capture	updated_img0912.png	updated_img0912 png	Success
+Skip	documentation.html		To be completed
+Capture	favicon.gif	favicon gif	Success
+Skip	img0912.jpg.tmp		To be completed
+Skip	access.lock
+(.*)\.(jpg|png|gif)$
+
+Exercise 6: Matching Lines
+Task	Text	Capture Groups	 
+Capture				The quick brown fox...	The quick brown fox...	Success
+Capture	   jumps over the lazy dog.	jumps over the lazy dog.	Success
+^\s*(.*)\s*$
+
+Exercise 7: Extracting Data From Log Entries
+Task	Text	Capture Groups	 
+Skip	W/dalvikvm( 1553): threadid=1: uncaught exception		To be completed
+Skip	E/( 1553): FATAL EXCEPTION: main		To be completed
+Skip	E/( 1553): java.lang.StringIndexOutOfBoundsException		To be completed
+Capture	E/( 1553):   at widget.List.makeView(ListView.java:1727)	makeView ListView.java 1727	Success
+Capture	E/( 1553):   at widget.List.fillDown(ListView.java:652)	fillDown ListView.java 652	Success
+Capture	E/( 1553):   at widget.List.fillFrom(ListView.java:709)	fillFrom ListView.java 709	Success
+\.([a-zA-Z]+)\(([a-zA-Z.]+):(\d{1,})\)
+
+Exercise 8: Extracting Data From URLs
+Task	Text	Capture Groups	 
+Capture	ftp://file_server.com:21/top_secret/life_changing_plans.pdf	ftp file_server.com 21	Success
+Capture	https://regexone.com/lesson/introduction#section	https regexone.com	Success
+Capture	file://localhost:4040/zip_file	file localhost 4040	Success
+Capture	https://s3cur3-server.com:9999/	https s3cur3-server.com 9999	Success
+Capture	market://search/angry%20birds	market search	Success
+(.+)://([a-zA-Z0-9._\-]+)(?::(\d{1,}))?
